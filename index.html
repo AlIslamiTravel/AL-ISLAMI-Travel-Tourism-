@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AL ISLAMI Travel & Tourism | رحلات، فنادق، حج وعمرة</title>
@@ -412,6 +411,176 @@ section{
     line-height:1.8;
 }
 
+/* ===== Flight Search ===== */
+.flight-search{
+    background:linear-gradient(135deg,var(--primary),var(--primary-light));
+    position:relative;
+}
+.flight-search .section-title,
+.flight-search .section-sub{color:#fff;}
+.flight-search .section-sub{color:rgba(255,255,255,.7);}
+
+.flight-box{
+    max-width:980px;
+    margin:0 auto;
+    background:#fff;
+    border-radius:var(--radius);
+    padding:34px;
+    box-shadow:var(--shadow);
+}
+
+.flight-form{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr 1fr auto;
+    gap:14px;
+    align-items:end;
+}
+
+.flight-field{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+.flight-field label{
+    font-size:12.5px;
+    font-weight:700;
+    color:var(--text-muted);
+}
+.flight-field input,
+.flight-field select{
+    padding:14px 16px;
+    border:1.5px solid var(--border);
+    border-radius:12px;
+    font-size:14.5px;
+    font-family:'Cairo',sans-serif;
+    outline:none;
+    transition:.25s;
+    background:#fff;
+    color:var(--text);
+}
+.flight-field input:focus,
+.flight-field select:focus{border-color:var(--secondary);}
+
+.flight-search-btn{
+    padding:14px 30px;
+    white-space:nowrap;
+}
+
+.flight-swap{
+    display:flex;
+    justify-content:center;
+}
+
+.flight-status{
+    text-align:center;
+    padding:30px 0 6px;
+    color:var(--text-muted);
+    font-size:14.5px;
+    display:none;
+}
+.flight-status.show{display:block;}
+
+.flight-spinner{
+    width:38px;
+    height:38px;
+    border:4px solid var(--border);
+    border-top:4px solid var(--secondary);
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+    margin:0 auto 14px;
+}
+
+.flight-results{
+    margin-top:30px;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.flight-result-card{
+    border:1.5px solid var(--border);
+    border-radius:14px;
+    padding:22px 24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+    transition:.25s;
+    text-align:right;
+}
+.flight-result-card:hover{
+    border-color:var(--secondary);
+    box-shadow:0 10px 25px rgba(6,40,61,.08);
+}
+
+.flight-info{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+.flight-airline{
+    font-weight:700;
+    color:var(--primary);
+    font-size:16px;
+}
+.flight-route{
+    color:var(--text-muted);
+    font-size:14px;
+}
+.flight-times{
+    color:var(--text-muted);
+    font-size:13px;
+}
+.flight-meta-badges{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+.flight-badge{
+    background:var(--cream);
+    color:var(--accent);
+    font-size:12px;
+    font-weight:700;
+    padding:4px 12px;
+    border-radius:20px;
+}
+
+.flight-price-block{
+    text-align:left;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:8px;
+}
+.flight-price{
+    font-size:24px;
+    font-weight:800;
+    color:var(--accent);
+}
+.flight-price span{
+    font-size:12px;
+    color:var(--text-muted);
+    font-weight:400;
+}
+
+.flight-empty, .flight-error{
+    text-align:center;
+    padding:20px;
+    border-radius:14px;
+    font-size:14.5px;
+}
+.flight-empty{background:var(--cream);color:var(--text-muted);}
+.flight-error{background:#FCEBEA;color:#B3261E;}
+
+@media(max-width:900px){
+    .flight-form{grid-template-columns:1fr 1fr;}
+    .flight-search-btn{grid-column:1/-1;}
+}
+@media(max-width:520px){
+    .flight-form{grid-template-columns:1fr;}
+}
+
 /* ===== Offers ===== */
 .offers{
     background:var(--cream);
@@ -783,6 +952,7 @@ footer{
 <nav id="nav">
 <a href="#home">الرئيسية</a>
 <a href="#services">خدماتنا</a>
+<a href="#flights">حجز الطيران</a>
 <a href="#offers">العروض</a>
 <a href="#trips">الرحلات</a>
 <a href="#booking">الحجز</a>
@@ -798,7 +968,7 @@ footer{
 <p>من رحلات الحج والعمرة إلى أجمل الوجهات السياحية حول العالم، نرافقك بخطوة بخطوة بأسعار تنافسية وخدمة على مدار الساعة.</p>
 
 <div class="hero-actions">
-<a href="#trips" class="btn">استكشف الرحلات</a>
+<a href="#flights" class="btn">ابحث عن رحلة طيران</a>
 <a href="#booking" class="btn btn-outline">احجز استشارة مجانية</a>
 </div>
 
@@ -889,6 +1059,55 @@ footer{
 </div>
 </section>
 
+<section id="flights" class="flight-search">
+<span class="eyebrow-sm" style="color:var(--secondary);">بحث حي</span>
+<h2 class="section-title">ابحث واحجز تذكرة طيرانك الآن</h2>
+<p class="section-sub">نتائج مباشرة من شركات الطيران العالمية عبر نظام الحجز الخاص بنا</p>
+
+<div class="flight-box">
+<form id="flightSearchForm" class="flight-form">
+
+<div class="flight-field">
+<label for="flightOrigin">من (مطار المغادرة)</label>
+<input type="text" id="flightOrigin" placeholder="مثال: KWI" maxlength="3" required autocomplete="off">
+</div>
+
+<div class="flight-field">
+<label for="flightDestination">إلى (مطار الوجهة)</label>
+<input type="text" id="flightDestination" placeholder="مثال: IST" maxlength="3" required autocomplete="off">
+</div>
+
+<div class="flight-field">
+<label for="flightDepartDate">تاريخ المغادرة</label>
+<input type="date" id="flightDepartDate" required>
+</div>
+
+<div class="flight-field">
+<label for="flightPassengers">عدد المسافرين</label>
+<select id="flightPassengers">
+<option value="1">1 مسافر</option>
+<option value="2">2 مسافرين</option>
+<option value="3">3 مسافرين</option>
+<option value="4">4 مسافرين</option>
+<option value="5">5 مسافرين</option>
+<option value="6">6 مسافرين</option>
+</select>
+</div>
+
+<button type="submit" class="btn flight-search-btn" id="flightSearchBtn">🔍 ابحث عن رحلات</button>
+
+</form>
+
+<div class="flight-status" id="flightStatus">
+<div class="flight-spinner"></div>
+<p id="flightStatusText">جاري البحث عن أفضل الرحلات المتاحة...</p>
+</div>
+
+<div class="flight-results" id="flightResults"></div>
+
+</div>
+</section>
+
 <section id="offers" class="offers">
 <span class="eyebrow-sm">لفترة محدودة</span>
 <h2 class="section-title">أحدث العروض والباقات</h2>
@@ -968,30 +1187,6 @@ footer{
 <div class="stat-box"><h2 id="c2">0</h2><p>رحلة مكتملة</p></div>
 <div class="stat-box"><h2 id="c3">0</h2><p>دولة حول العالم</p></div>
 <div class="stat-box"><h2 id="c4">0</h2><p>سنة خبرة</p></div>
-</div>
-</section>
-
-<section id="flight-search" style="background:var(--cream);">
-<span class="eyebrow-sm">بحث حي</span>
-<h2 class="section-title">ابحث عن رحلتك الآن</h2>
-<p class="section-sub">أسعار حقيقية ومحدّثة من مئات شركات الطيران — أدخل بيانات رحلتك واحصل على أفضل الأسعار المتاحة</p>
-
-<div class="card form-card">
-<form id="flightSearchForm">
-<div class="trip-toolbar" style="margin-bottom:16px;">
-<input id="fsOrigin" type="text" class="field" placeholder="من (مثال: KRT للخرطوم)" required maxlength="3" style="text-transform:uppercase;">
-<input id="fsDestination" type="text" class="field" placeholder="إلى (مثال: IST لإسطنبول)" required maxlength="3" style="text-transform:uppercase;">
-</div>
-<div class="trip-toolbar" style="margin-bottom:16px;">
-<input id="fsDepart" type="month" class="field" placeholder="شهر السفر">
-<input id="fsReturn" type="month" class="field" placeholder="شهر العودة (اختياري)">
-</div>
-<button type="submit" class="btn btn-block">ابحث عن رحلات</button>
-</form>
-
-<div id="fsLoading" style="display:none;text-align:center;padding:24px;color:var(--text-muted);">🔍 جاري البحث عن أفضل الأسعار...</div>
-<div id="fsError" style="display:none;text-align:center;padding:16px;color:#c0392b;"></div>
-<div id="fsResults" style="display:flex;flex-direction:column;gap:14px;margin-top:24px;"></div>
 </div>
 </section>
 
@@ -1203,6 +1398,7 @@ footer{
 <ul class="footer-links">
 <li><a href="#home">الرئيسية</a></li>
 <li><a href="#services">خدماتنا</a></li>
+<li><a href="#flights">حجز الطيران</a></li>
 <li><a href="#offers">العروض</a></li>
 <li><a href="#trips">الرحلات</a></li>
 <li><a href="#booking">الحجز</a></li>
@@ -1389,78 +1585,6 @@ document.getElementById("booking").scrollIntoView({behavior:"smooth"});
 });
 });
 
-/* Real flight search (Travelpayouts via Netlify Function) */
-const flightSearchForm = document.getElementById("flightSearchForm");
-if(flightSearchForm){
-flightSearchForm.addEventListener("submit", async function(e){
-e.preventDefault();
-
-const origin = document.getElementById("fsOrigin").value.trim().toUpperCase();
-const destination = document.getElementById("fsDestination").value.trim().toUpperCase();
-const departMonth = document.getElementById("fsDepart").value; // yyyy-mm
-const returnMonth = document.getElementById("fsReturn").value; // yyyy-mm
-
-const loadingEl = document.getElementById("fsLoading");
-const errorEl = document.getElementById("fsError");
-const resultsEl = document.getElementById("fsResults");
-
-resultsEl.innerHTML = "";
-errorEl.style.display = "none";
-loadingEl.style.display = "block";
-
-try{
-const params = new URLSearchParams({ origin, destination });
-if(departMonth) params.append("depart_date", departMonth);
-if(returnMonth) params.append("return_date", returnMonth);
-
-const res = await fetch(`/api/get-flights?${params.toString()}`);
-const data = await res.json();
-
-loadingEl.style.display = "none";
-
-if(!data.success || !data.results || data.results.length === 0){
-errorEl.textContent = "ما فيه نتائج متاحة لهذا الخط حالياً، جرّب وجهة أو تاريخ ثاني.";
-errorEl.style.display = "block";
-return;
-}
-
-data.results
-.sort((a,b)=>a.price-b.price)
-.forEach(flight=>{
-const card = document.createElement("div");
-card.style.cssText = "border:1px solid var(--border);border-radius:14px;padding:20px 22px;background:#fff;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;";
-const departDate = flight.departure_at ? new Date(flight.departure_at).toLocaleDateString("ar-EG") : "—";
-card.innerHTML = `
-<div>
-<strong style="font-size:16px;color:var(--primary);">${origin} → ${destination}</strong>
-<p style="color:var(--text-muted);font-size:13.5px;margin-top:6px;">شركة الطيران: ${flight.airline || "—"} · تاريخ المغادرة: ${departDate} · التوقفات: ${flight.transfers ?? "—"}</p>
-</div>
-<div style="text-align:left;">
-<div style="font-size:22px;font-weight:800;color:var(--accent);">$${flight.price}</div>
-<button type="button" class="btn book-btn" style="padding:10px 20px;font-size:13.5px;margin-top:6px;" data-trip="${origin} إلى ${destination} - ${flight.airline || ''}">احجز الآن</button>
-</div>
-`;
-resultsEl.appendChild(card);
-});
-
-/* اربط أزرار الحجز الجديدة بنفس سلوك زر "احجز الآن" الموجود */
-resultsEl.querySelectorAll(".book-btn").forEach(btn=>{
-btn.addEventListener("click",()=>{
-const notes = document.getElementById("notes");
-if(notes) notes.value = "الرحلة المطلوبة: " + btn.dataset.trip;
-document.getElementById("booking").scrollIntoView({behavior:"smooth"});
-});
-});
-
-}catch(err){
-loadingEl.style.display = "none";
-errorEl.textContent = "تعذر الاتصال بخدمة البحث، حاول مرة أخرى.";
-errorEl.style.display = "block";
-console.error("خطأ بحث الرحلات:", err);
-}
-});
-}
-
 /* FAQ accordion */
 document.querySelectorAll(".faq-q").forEach(q=>{
 q.addEventListener("click",()=>{
@@ -1644,6 +1768,138 @@ if(adminLogoutBtn){
 adminLogoutBtn.addEventListener("click", async ()=>{
 await signOut(auth);
 showToast("تم تسجيل الخروج");
+});
+}
+
+/* =====================================================
+   Flight Search (Duffel via Netlify Function)
+   Calls /.netlify/functions/search-flights
+===================================================== */
+const flightForm = document.getElementById("flightSearchForm");
+const flightStatus = document.getElementById("flightStatus");
+const flightStatusText = document.getElementById("flightStatusText");
+const flightResults = document.getElementById("flightResults");
+const flightSearchBtn = document.getElementById("flightSearchBtn");
+
+/* Set a sensible default date (tomorrow) and minimum date (today) */
+const departInput = document.getElementById("flightDepartDate");
+if(departInput){
+const today = new Date();
+const tomorrow = new Date(today);
+tomorrow.setDate(today.getDate()+1);
+const toISO = (d)=> d.toISOString().split("T")[0];
+departInput.min = toISO(today);
+departInput.value = toISO(tomorrow);
+}
+
+function formatDuration(iso){
+if(!iso) return "";
+const match = iso.match(/PT(?:(\d+)H)?(?:(\d+)M)?/);
+if(!match) return iso;
+const h = match[1] ? `${match[1]}س ` : "";
+const m = match[2] ? `${match[2]}د` : "";
+return (h+m).trim();
+}
+
+function formatTime(dt){
+if(!dt) return "—";
+try{
+return new Date(dt).toLocaleTimeString("ar-EG",{hour:"2-digit",minute:"2-digit"});
+}catch(e){ return dt; }
+}
+
+function renderFlightResults(offers){
+flightResults.innerHTML = "";
+
+if(!offers || offers.length === 0){
+flightResults.innerHTML = `<div class="flight-empty">ما فيه رحلات متاحة على هذا المسار والتاريخ. جرب تاريخ أو مطار ثاني.</div>`;
+return;
+}
+
+offers.slice(0,15).forEach(offer=>{
+const slice = offer.slices && offer.slices[0];
+const segment = slice && slice.segments && slice.segments[0];
+const lastSegment = slice && slice.segments && slice.segments[slice.segments.length-1];
+
+const airline = (segment && segment.marketing_carrier && segment.marketing_carrier.name) || "شركة طيران";
+const flightNo = (segment && segment.marketing_carrier_flight_number) || "";
+const origin = (segment && segment.origin && segment.origin.iata_code) || "";
+const destination = (lastSegment && lastSegment.destination && lastSegment.destination.iata_code) || "";
+const departTime = segment && segment.departing_at;
+const arriveTime = lastSegment && lastSegment.arriving_at;
+const stops = slice && slice.segments ? slice.segments.length - 1 : 0;
+const duration = slice && slice.duration ? formatDuration(slice.duration) : "";
+const price = offer.total_amount || "—";
+const currency = offer.total_currency || "";
+
+const card = document.createElement("div");
+card.className = "flight-result-card";
+card.innerHTML = `
+<div class="flight-info">
+<div class="flight-airline">${airline} ${flightNo ? "· رحلة " + flightNo : ""}</div>
+<div class="flight-route">${origin} → ${destination}</div>
+<div class="flight-times">🛫 ${formatTime(departTime)} — 🛬 ${formatTime(arriveTime)} ${duration ? "· المدة: " + duration : ""}</div>
+<div class="flight-meta-badges">
+<span class="flight-badge">${stops === 0 ? "رحلة مباشرة" : stops + " توقف"}</span>
+</div>
+</div>
+<div class="flight-price-block">
+<div class="flight-price">${price} <span>${currency}</span></div>
+<a href="#booking" class="btn" style="padding:10px 26px;font-size:14px;">احجز هذه الرحلة</a>
+</div>
+`;
+flightResults.appendChild(card);
+});
+}
+
+if(flightForm){
+flightForm.addEventListener("submit", async function(e){
+e.preventDefault();
+
+const origin = document.getElementById("flightOrigin").value.trim().toUpperCase();
+const destination = document.getElementById("flightDestination").value.trim().toUpperCase();
+const departDate = document.getElementById("flightDepartDate").value;
+const passengers = document.getElementById("flightPassengers").value;
+
+if(origin.length !== 3 || destination.length !== 3){
+flightResults.innerHTML = `<div class="flight-error">رجاءً أدخل رمز مطار مكوّن من 3 أحرف (مثال: KWI، IST، DXB).</div>`;
+return;
+}
+
+flightResults.innerHTML = "";
+flightStatus.classList.add("show");
+flightStatusText.textContent = "جاري البحث عن أفضل الرحلات المتاحة...";
+flightSearchBtn.disabled = true;
+flightSearchBtn.style.opacity = ".6";
+
+try{
+const params = new URLSearchParams({
+origin,
+destination,
+departure_date: departDate,
+passengers
+});
+
+const response = await fetch(`/.netlify/functions/search-flights?${params.toString()}`);
+
+if(!response.ok){
+const errText = await response.text().catch(()=> "");
+throw new Error(`خطأ من الخادم (${response.status}) ${errText ? "— " + errText : ""}`);
+}
+
+const data = await response.json();
+const offers = data.offers || data.data || data;
+
+renderFlightResults(Array.isArray(offers) ? offers : []);
+
+}catch(err){
+console.error("خطأ بحث الرحلات:", err);
+flightResults.innerHTML = `<div class="flight-error">تعذر جلب نتائج الرحلات: ${err.message || "خطأ غير معروف"}. حاول مرة أخرى.</div>`;
+}finally{
+flightStatus.classList.remove("show");
+flightSearchBtn.disabled = false;
+flightSearchBtn.style.opacity = "1";
+}
 });
 }
 
