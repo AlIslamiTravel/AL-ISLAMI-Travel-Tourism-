@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AL ISLAMI Travel & Tourism | رحلات، فنادق، حج وعمرة</title>
+<meta name="description" content="وكالة الإسلامي للسفر والسياحة - الخرطوم. تذاكر طيران، فنادق، حج وعمرة، تأشيرات، وباقات سياحية حول العالم.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Cairo',sans-serif;
+    scroll-behavior:smooth;
+}
+
+:root{
+    --primary:#06283D;
+    --primary-light:#0E3E5C;
+    --secondary:#D4AF37;
+    --secondary-light:#E8C766;
+    --accent:#0B6E4F;
+    --accent-light:#0F8A63;
+    --cream:#FBF8F1;
+    --bg:#F5F7FA;
+    --text:#1C2530;
+    --text-muted:#5A6472;
+    --border:#E7E4DC;
+    --radius:18px;
+    --shadow:0 20px 45px rgba(6,40,61,.09);
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+}
+
+h1,h2,h3{
+    font-family:'Amiri',serif;
+}
+
+img{max-width:100%;display:block;}
+
+/* ===== Loading ===== */
+.loader{
+    position:fixed;
+    inset:0;
+    background:var(--primary);
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    transition:opacity .5s ease, visibility .5s ease;
+}
+
+.loader span{
+    width:70px;
+    height:70px;
+    border:5px solid rgba(255,255,255,.15);
+    border-top:5px solid var(--secondary);
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+}
+
+.loader p{
+    color:rgba(255,255,255,.7);
+    font-size:14px;
+    letter-spacing:1px;
+}
+
+.loader.hide{opacity:0;visibility:hidden;}
+
+@keyframes spin{
+    to{transform:rotate(360deg);}
+}
+
+/* ===== Pattern helper (Islamic geometric motif, subtle) ===== */
+.pattern{
+    background-image:radial-gradient(circle at 1px 1px, rgba(212,175,55,.35) 1.4px, transparent 0);
+    background-size:26px 26px;
+}
+
+/* ===== Announcement bar ===== */
+.topbar{
+    background:var(--accent);
+    color:#fff;
+    font-size:13.5px;
+    text-align:center;
+    padding:9px 16px;
+    letter-spacing:.3px;
+}
+
+/* ===== Header ===== */
+header{
+    position:fixed;
+    top:34px;
+    width:100%;
+    z-index:1000;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 6%;
+    background:rgba(6,40,61,.35);
+    backdrop-filter:blur(16px);
+    transition:.35s;
+}
+
+header.scrolled{
+    top:0;
+    background:var(--primary);
+    padding:13px 6%;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+.logo{
+    color:#fff;
+    font-family:'Amiri',serif;
+    font-size:28px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.logo span{color:var(--secondary);}
+
+nav{
+    display:flex;
+    gap:28px;
+    align-items:center;
+}
+
+nav a{
+    text-decoration:none;
+    color:#fff;
+    font-weight:600;
+    font-size:15px;
+    position:relative;
+    padding-bottom:4px;
+    transition:.3s;
+}
+
+nav a::after{
+    content:"";
+    position:absolute;
+    bottom:0;
+    right:0;
+    width:0;
+    height:2px;
+    background:var(--secondary);
+    transition:.3s;
+}
+
+nav a:hover{color:var(--secondary);}
+nav a:hover::after{width:100%;}
+
+.nav-cta{
+    background:var(--secondary);
+    color:var(--primary) !important;
+    padding:10px 22px;
+    border-radius:40px;
+    font-weight:700 !important;
+}
+.nav-cta::after{display:none;}
+
+.menu-toggle{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+    background:none;
+    border:none;
+}
+.menu-toggle span{width:26px;height:2.5px;background:#fff;border-radius:2px;}
+
+/* ===== Hero ===== */
+.hero{
+    min-height:100vh;
+    position:relative;
+    background:
+    linear-gradient(120deg, rgba(6,40,61,.82), rgba(6,40,61,.55) 55%, rgba(11,110,79,.45)),
+    url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w:1600&q=80")
+    center/cover fixed;
+    display:flex;
+    align-items:center;
+    padding:150px 6% 90px;
+    color:#fff;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:radial-gradient(circle at 2px 2px, rgba(212,175,55,.25) 1.6px, transparent 0);
+    background-size:34px 34px;
+    opacity:.5;
+}
+
+.hero-inner{
+    position:relative;
+    z-index:2;
+    max-width:680px;
+}
+
+.eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(212,175,55,.5);
+    color:var(--secondary-light);
+    padding:8px 18px;
+    border-radius:40px;
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:26px;
+}
+
+.hero-inner h1{
+    font-size:56px;
+    line-height:1.25;
+    margin-bottom:22px;
+    font-weight:700;
+}
+
+.hero-inner h1 em{
+    color:var(--secondary);
+    font-style:normal;
+}
+
+.hero-inner p{
+    font-size:19px;
+    line-height:1.8;
+    color:rgba(255,255,255,.85);
+    margin-bottom:38px;
+    max-width:560px;
+}
+
+.hero-actions{
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+    margin-bottom:55px;
+}
+
+.btn{
+    display:inline-block;
+    background:var(--secondary);
+    color:var(--primary);
+    text-decoration:none;
+    padding:16px 36px;
+    border-radius:40px;
+    font-weight:700;
+    font-size:15.5px;
+    border:2px solid var(--secondary);
+    transition:.3s;
+    cursor:pointer;
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 30px rgba(212,175,55,.35);
+}
+
+.btn-outline{
+    background:transparent;
+    color:#fff;
+    border:2px solid rgba(255,255,255,.5);
+}
+.btn-outline:hover{
+    background:rgba(255,255,255,.1);
+    border-color:#fff;
+    box-shadow:none;
+}
+
+.btn-block{width:100%;text-align:center;border:none;cursor:pointer;}
+
+.hero-stats{
+    display:flex;
+    gap:40px;
+    flex-wrap:wrap;
+}
+
+.hero-stats div{
+    border-right:2px solid rgba(212,175,55,.5);
+    padding-right:18px;
+}
+.hero-stats div:first-child{padding-right:0;border:none;}
+
+.hero-stats h3{
+    font-size:30px;
+    color:var(--secondary);
+    font-family:'Cairo',sans-serif;
+    font-weight:800;
+}
+.hero-stats p{
+    font-size:13.5px;
+    color:rgba(255,255,255,.7);
+    margin:0;
+}
+
+/* ===== Destination ticker ===== */
+.ticker-wrap{
+    background:var(--primary-light);
+    overflow:hidden;
+    padding:16px 0;
+}
+.ticker{
+    display:flex;
+    gap:60px;
+    width:max-content;
+    animation:scroll-left 28s linear infinite;
+}
+.ticker span{
+    color:rgba(255,255,255,.75);
+    font-weight:600;
+    font-size:15px;
+    white-space:nowrap;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+.ticker span b{color:var(--secondary);}
+@keyframes scroll-left{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+}
+
+/* ===== Sections ===== */
+section{
+    padding:100px 6%;
+}
+
+.eyebrow-sm{
+    display:block;
+    text-align:center;
+    color:var(--accent);
+    font-weight:700;
+    letter-spacing:1px;
+    font-size:14px;
+    margin-bottom:10px;
+}
+
+.section-title{
+    text-align:center;
+    font-size:38px;
+    color:var(--primary);
+    margin-bottom:16px;
+    font-weight:700;
+}
+
+.section-sub{
+    text-align:center;
+    color:var(--text-muted);
+    max-width:600px;
+    margin:0 auto 55px;
+    font-size:16px;
+    line-height:1.8;
+}
+
+/* ===== Cards / Grid ===== */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:28px;
+}
+
+.card{
+    background:#fff;
+    border-radius:var(--radius);
+    padding:38px 30px;
+    text-align:center;
+    box-shadow:var(--shadow);
+    transition:.35s;
+    border:1px solid var(--border);
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    border-color:var(--secondary);
+}
+
+.card .icon{
+    width:66px;
+    height:66px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    margin:0 auto 22px;
+}
+
+.card h3{
+    margin-bottom:12px;
+    color:var(--primary);
+    font-size:21px;
+}
+
+.card p{
+    color:var(--text-muted);
+    font-size:14.5px;
+    line-height:1.8;
+}
+
+/* ===== Offers ===== */
+.offers{
+    background:var(--cream);
+}
+.offer-card{
+    background:#fff;
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    position:relative;
+    border:1px solid var(--border);
+    transition:.35s;
+}
+.offer-card:hover{transform:translateY(-8px);}
+
+.offer-badge{
+    position:absolute;
+    top:20px;
+    left:20px;
+    background:var(--accent);
+    color:#fff;
+    font-size:13px;
+    font-weight:700;
+    padding:7px 16px;
+    border-radius:30px;
+    z-index:2;
+}
+
+.offer-img{
+    height:190px;
+    background-size:cover;
+    background-position:center;
+    position:relative;
+}
+.offer-img::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, rgba(6,40,61,0) 40%, rgba(6,40,61,.75));
+}
+
+.offer-body{padding:26px 24px 30px;}
+.offer-body h3{color:var(--primary);font-size:20px;margin-bottom:8px;}
+.offer-body p{color:var(--text-muted);font-size:14px;margin-bottom:16px;line-height:1.7;}
+
+.price-row{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:18px;
+}
+.price-old{
+    color:#a9a9a9;
+    text-decoration:line-through;
+    font-size:15px;
+}
+.price-new{
+    color:var(--accent);
+    font-size:26px;
+    font-weight:800;
+}
+
+/* ===== Why us ===== */
+.why{
+    background:var(--primary);
+    color:#fff;
+    position:relative;
+}
+.why .section-title,.why .section-sub{color:#fff;}
+.why .section-sub{color:rgba(255,255,255,.7);}
+.why-card{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:var(--radius);
+    padding:34px 26px;
+    text-align:center;
+    transition:.3s;
+}
+.why-card:hover{background:rgba(255,255,255,.1);}
+.why-card .icon{
+    font-size:34px;
+    margin-bottom:18px;
+}
+.why-card h3{font-size:19px;margin-bottom:10px;}
+.why-card p{font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;}
+
+/* ===== Stats ===== */
+.stats{
+    background:linear-gradient(135deg,var(--primary),var(--primary-light));
+    color:#fff;
+}
+.stat-box{text-align:center;}
+.stat-box h2{
+    color:var(--secondary);
+    font-size:48px;
+    font-family:'Cairo',sans-serif;
+    font-weight:800;
+}
+.stat-box p{font-size:15px;color:rgba(255,255,255,.75);margin-top:6px;}
+
+/* ===== Trips ===== */
+.trip-toolbar{
+    max-width:820px;
+    margin:0 auto 45px;
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:15px;
+}
+.field{
+    padding:15px 20px;
+    border:1.5px solid var(--border);
+    border-radius:14px;
+    font-size:15px;
+    outline:none;
+    font-family:'Cairo',sans-serif;
+    transition:.25s;
+    background:#fff;
+}
+.field:focus{border-color:var(--secondary);}
+
+.trip-card{padding:0;overflow:hidden;text-align:right;}
+.trip-img{height:210px;background-size:cover;background-position:center;position:relative;}
+.trip-tag{
+    position:absolute;
+    top:16px;
+    right:16px;
+    background:rgba(6,40,61,.85);
+    color:var(--secondary);
+    font-size:12.5px;
+    font-weight:700;
+    padding:6px 14px;
+    border-radius:30px;
+}
+.trip-body{padding:24px 26px 28px;}
+.trip-body h3{color:var(--primary);font-size:20px;margin-bottom:10px;}
+.trip-meta{
+    display:flex;
+    justify-content:space-between;
+    color:var(--text-muted);
+    font-size:13.5px;
+    margin-bottom:14px;
+}
+.trip-stars{color:var(--secondary);margin-bottom:16px;font-size:14px;}
+.trip-price{
+    font-size:24px;
+    font-weight:800;
+    color:var(--accent);
+    margin-bottom:18px;
+}
+.trip-price span{font-size:13px;color:var(--text-muted);font-weight:400;}
+
+/* ===== Booking / Contact forms ===== */
+.form-card{
+    max-width:720px;
+    margin:auto;
+    text-align:right;
+    padding:44px;
+}
+.input, textarea.input{
+    width:100%;
+    padding:15px 18px;
+    margin-bottom:16px;
+    border:1.5px solid var(--border);
+    border-radius:14px;
+    font-family:'Cairo',sans-serif;
+    font-size:15px;
+    outline:none;
+    transition:.25s;
+}
+.input:focus, textarea.input:focus{border-color:var(--secondary);}
+textarea.input{height:130px;resize:vertical;}
+
+/* ===== Testimonials ===== */
+.testi-card{text-align:right;}
+.testi-card .stars{color:var(--secondary);margin-bottom:14px;font-size:15px;}
+.testi-card p{color:var(--text);font-size:15px;line-height:1.85;margin-bottom:18px;}
+.testi-who{display:flex;align-items:center;gap:12px;}
+.testi-avatar{
+    width:44px;height:44px;border-radius:50%;
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;
+}
+.testi-who strong{display:block;color:var(--primary);font-size:14.5px;}
+.testi-who span{font-size:12.5px;color:var(--text-muted);}
+
+/* ===== FAQ ===== */
+.faq{max-width:800px;margin:0 auto;}
+.faq-item{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:14px;
+    margin-bottom:14px;
+    overflow:hidden;
+}
+.faq-q{
+    padding:20px 26px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    cursor:pointer;
+    font-weight:700;
+    color:var(--primary);
+    font-size:15.5px;
+}
+.faq-q .plus{
+    color:var(--secondary);
+    font-size:22px;
+    transition:.3s;
+    flex-shrink:0;
+    margin-left:14px;
+}
+.faq-item.open .plus{transform:rotate(45deg);}
+.faq-a{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .35s ease, padding .35s ease;
+    color:var(--text-muted);
+    font-size:14.5px;
+    line-height:1.8;
+    padding:0 26px;
+}
+.faq-item.open .faq-a{max-height:220px;padding:0 26px 22px;}
+
+/* ===== Footer ===== */
+footer{
+    background:var(--primary);
+    color:rgba(255,255,255,.8);
+    padding:70px 6% 0;
+}
+.footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1.2fr;
+    gap:40px;
+    padding-bottom:50px;
+    border-bottom:1px solid rgba(255,255,255,.12);
+}
+.footer-grid h4{
+    color:#fff;
+    font-size:16px;
+    margin-bottom:20px;
+    font-family:'Cairo',sans-serif;
+}
+.footer-grid p{font-size:14px;line-height:1.9;color:rgba(255,255,255,.6);}
+.footer-links{list-style:none;}
+.footer-links li{margin-bottom:12px;}
+.footer-links a{
+    color:rgba(255,255,255,.65);
+    text-decoration:none;
+    font-size:14px;
+    transition:.25s;
+}
+.footer-links a:hover{color:var(--secondary);}
+.footer-logo{
+    font-family:'Amiri',serif;
+    font-size:26px;
+    color:#fff;
+    margin-bottom:16px;
+    font-weight:700;
+}
+.footer-logo span{color:var(--secondary);}
+.social-row{display:flex;gap:12px;margin-top:20px;}
+.social-row a{
+    width:38px;height:38px;border-radius:50%;
+    background:rgba(255,255,255,.08);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;text-decoration:none;font-size:15px;
+    transition:.25s;
+}
+.social-row a:hover{background:var(--secondary);color:var(--primary);}
+.footer-bottom{
+    padding:26px 0;
+    text-align:center;
+    font-size:13.5px;
+    color:rgba(255,255,255,.5);
+}
+
+/* ===== Floating buttons ===== */
+.whatsapp,.top-btn{
+    position:fixed;
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+    text-decoration:none;
+    font-size:24px;
+    z-index:999;
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+    transition:.3s;
+}
+.whatsapp{background:#25D366;bottom:24px;left:24px;}
+.top-btn{background:var(--primary);bottom:96px;left:24px;opacity:0;pointer-events:none;}
+.top-btn.show{opacity:1;pointer-events:auto;}
+.whatsapp:hover,.top-btn:hover{transform:translateY(-4px);}
+
+/* ===== Toast ===== */
+#toast{
+    position:fixed;
+    top:24px;
+    left:50%;
+    transform:translateX(-50%);
+    background:var(--primary);
+    color:#fff;
+    padding:16px 28px;
+    border-radius:14px;
+    display:none;
+    z-index:99999;
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
+    font-size:14.5px;
+    border-right:4px solid var(--secondary);
+}
+
+/* ===== Admin ===== */
+#admin{background:var(--cream);}
+
+/* ===== Responsive ===== */
+@media(max-width:900px){
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .hero-inner h1{font-size:42px;}
+}
+
+@media(max-width:768px){
+    .topbar{font-size:12px;padding:8px 12px;}
+    header{top:0;flex-wrap:wrap;padding:16px 6%;}
+    .menu-toggle{display:flex;}
+    nav{
+        position:fixed;
+        top:0;right:-100%;
+        width:75%;
+        height:100vh;
+        background:var(--primary);
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        transition:.4s;
+        gap:30px;
+    }
+    nav.open{right:0;}
+    .hero{padding:140px 6% 70px;}
+    .hero-inner h1{font-size:34px;}
+    .hero-inner p{font-size:16px;}
+    .hero-stats{gap:24px;}
+    section{padding:70px 6%;}
+    .section-title{font-size:28px;}
+    .trip-toolbar{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;gap:34px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="loader">
+<span></span>
+<p>AL ISLAMI TRAVEL & TOURISM</p>
+</div>
+
+<div class="topbar" id="topbar">
+✈️ عرض محدود: خصم يصل إلى 20% على باقات الحج والعمرة لهذا الموسم — تواصل معنا الآن
+</div>
+
+<header id="header">
+<div class="logo">AL <span>ISLAMI</span></div>
+
+<button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
+
+<nav id="nav">
+<a href="#home">الرئيسية</a>
+<a href="#services">خدماتنا</a>
+<a href="#offers">العروض</a>
+<a href="#trips">الرحلات</a>
+<a href="#booking">الحجز</a>
+<a href="#contact">تواصل</a>
+<a href="#booking" class="nav-cta">احجز الآن</a>
+</nav>
+</header>
+
+<section class="hero" id="home">
+<div class="hero-inner">
+<span class="eyebrow">🕌 خدمات سفر موثوقة منذ أكثر من 10 سنوات</span>
+<h1>اكتشف العالم مع <em>الإسلامي</em> للسفر والسياحة</h1>
+<p>من رحلات الحج والعمرة إلى أجمل الوجهات السياحية حول العالم، نرافقك بخطوة بخطوة بأسعار تنافسية وخدمة على مدار الساعة.</p>
+
+<div class="hero-actions">
+<a href="#trips" class="btn">استكشف الرحلات</a>
+<a href="#booking" class="btn btn-outline">احجز استشارة مجانية</a>
+</div>
+
+<div class="hero-stats">
+<div><h3 id="hs1">0</h3><p>عميل سعيد</p></div>
+<div><h3 id="hs2">0</h3><p>وجهة حول العالم</p></div>
+<div><h3 id="hs3">0</h3><p>سنة خبرة</p></div>
+</div>
+</div>
+</section>
+
+<div class="ticker-wrap">
+<div class="ticker" id="ticker">
+<span><b>✈</b> إسطنبول</span>
+<span><b>✈</b> دبي</span>
+<span><b>✈</b> مكة والمدينة</span>
+<span><b>✈</b> القاهرة</span>
+<span><b>✈</b> كوالالمبور</span>
+<span><b>✈</b> أديس أبابا</span>
+<span><b>✈</b> باكو</span>
+<span><b>✈</b> زنجبار</span>
+<span><b>✈</b> إسطنبول</span>
+<span><b>✈</b> دبي</span>
+<span><b>✈</b> مكة والمدينة</span>
+<span><b>✈</b> القاهرة</span>
+<span><b>✈</b> كوالالمبور</span>
+<span><b>✈</b> أديس أبابا</span>
+<span><b>✈</b> باكو</span>
+<span><b>✈</b> زنجبار</span>
+</div>
+</div>
+
+<section id="services">
+<span class="eyebrow-sm">خدماتنا</span>
+<h2 class="section-title">كل ما تحتاجه لرحلتك في مكان واحد</h2>
+<p class="section-sub">مجموعة متكاملة من الخدمات السياحية المصممة لتغطية كل تفاصيل رحلتك من الحجز حتى العودة</p>
+
+<div class="grid">
+
+<div class="card">
+<div class="icon">✈️</div>
+<h3>تذاكر الطيران</h3>
+<p>أفضل أسعار التذاكر لجميع شركات الطيران والوجهات العالمية مع خيارات مرنة للحجز والتعديل.</p>
+</div>
+
+<div class="card">
+<div class="icon">🕋</div>
+<h3>الحج والعمرة</h3>
+<p>باقات متكاملة تشمل التأشيرة والسكن والمواصلات وإشراف مرشدين متخصصين.</p>
+</div>
+
+<div class="card">
+<div class="icon">🏨</div>
+<h3>حجوزات الفنادق</h3>
+<p>شبكة واسعة من الفنادق بمختلف الفئات تناسب جميع الميزانيات والأذواق.</p>
+</div>
+
+<div class="card">
+<div class="icon">🌍</div>
+<h3>البرامج السياحية</h3>
+<p>باقات سياحية جاهزة أو مصممة حسب رغبتك تشمل الجولات والأنشطة والمرشد السياحي.</p>
+</div>
+
+<div class="card">
+<div class="icon">🚗</div>
+<h3>تأجير السيارات</h3>
+<p>خيارات متنوعة لتأجير السيارات في أشهر الوجهات السياحية بأسعار مناسبة.</p>
+</div>
+
+<div class="card">
+<div class="icon">📄</div>
+<h3>خدمات التأشيرات</h3>
+<p>إنجاز إجراءات التأشيرة بسرعة ودقة لمعظم دول العالم مع متابعة الطلب أولاً بأول.</p>
+</div>
+
+<div class="card">
+<div class="icon">🛡️</div>
+<h3>التأمين على السفر</h3>
+<p>تغطية تأمينية شاملة تحميك من المخاطر الصحية والطارئة أثناء سفرك.</p>
+</div>
+
+<div class="card">
+<div class="icon">💍</div>
+<h3>باقات شهر العسل</h3>
+<p>برامج رومانسية مصممة خصيصاً للأزواج في أجمل الوجهات حول العالم.</p>
+</div>
+
+</div>
+</section>
+
+<section id="offers" class="offers">
+<span class="eyebrow-sm">لفترة محدودة</span>
+<h2 class="section-title">أحدث العروض والباقات</h2>
+<p class="section-sub">وفّر أكثر مع عروضنا الموسمية على أشهر الوجهات والبرامج الدينية والسياحية</p>
+
+<div class="grid">
+
+<div class="offer-card">
+<span class="offer-badge">خصم 20%</span>
+<div class="offer-img" style="background-image:url('https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=500&q=80');"></div>
+<div class="offer-body">
+<h3>عرض الصيف - إسطنبول</h3>
+<p>7 ليالٍ شاملة الإقامة والإفطار وجولة البوسفور.</p>
+<div class="price-row"><span class="price-old">999$</span><span class="price-new">799$</span></div>
+<a href="#booking" class="btn btn-block">احجز العرض</a>
+</div>
+</div>
+
+<div class="offer-card">
+<span class="offer-badge">حجز مبكر</span>
+<div class="offer-img" style="background-image:url('https://images.unsplash.com/photo-1512632578888-169bbbc64f33?auto=format&fit=crop&w=500&q=80');"></div>
+<div class="offer-body">
+<h3>باقة العمرة المبكرة</h3>
+<p>10 أيام، إقامة قريبة من الحرمين، مواصلات ومرشد ديني.</p>
+<div class="price-row"><span class="price-old">1450$</span><span class="price-new">1200$</span></div>
+<a href="#booking" class="btn btn-block">احجز العرض</a>
+</div>
+</div>
+
+<div class="offer-card">
+<span class="offer-badge">خصم 25%</span>
+<div class="offer-img" style="background-image:url('https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&w=500&q=80');"></div>
+<div class="offer-body">
+<h3>شهر عسل - جزر المالديف بديل: زنجبار</h3>
+<p>6 ليالٍ في منتجع شاطئي فاخر مع عشاء خاص على الشاطئ.</p>
+<div class="price-row"><span class="price-old">1600$</span><span class="price-new">1199$</span></div>
+<a href="#booking" class="btn btn-block">احجز العرض</a>
+</div>
+</div>
+
+</div>
+</section>
+
+<section class="why">
+<span class="eyebrow-sm" style="color:var(--secondary);">لماذا الإسلامي</span>
+<h2 class="section-title">ثقة آلاف المسافرين كل عام</h2>
+<p class="section-sub">نجمع بين الخبرة الطويلة والأسعار التنافسية لنقدم لك تجربة سفر خالية من القلق</p>
+
+<div class="grid">
+<div class="why-card">
+<div class="icon">🏆</div>
+<h3>خبرة تتجاوز 10 سنوات</h3>
+<p>فريق متخصص في تنظيم الرحلات الدينية والسياحية داخل وخارج السودان.</p>
+</div>
+<div class="why-card">
+<div class="icon">💬</div>
+<h3>دعم على مدار الساعة</h3>
+<p>فريق خدمة العملاء متواجد للرد على استفساراتك قبل وأثناء وبعد الرحلة.</p>
+</div>
+<div class="why-card">
+<div class="icon">💰</div>
+<h3>أفضل الأسعار المضمونة</h3>
+<p>شراكات مباشرة مع شركات الطيران والفنادق تمنحك أسعاراً تنافسية دائماً.</p>
+</div>
+<div class="why-card">
+<div class="icon">🔒</div>
+<h3>حجز آمن وموثوق</h3>
+<p>إجراءات حجز واضحة وشفافة مع تأكيد فوري وضمان استرداد حسب السياسة.</p>
+</div>
+</div>
+</section>
+
+<section class="stats">
+<h2 class="section-title" style="color:#fff;">إنجازاتنا بالأرقام</h2>
+<div class="grid">
+<div class="stat-box"><h2 id="c1">0</h2><p>عميل سعيد</p></div>
+<div class="stat-box"><h2 id="c2">0</h2><p>رحلة مكتملة</p></div>
+<div class="stat-box"><h2 id="c3">0</h2><p>دولة حول العالم</p></div>
+<div class="stat-box"><h2 id="c4">0</h2><p>سنة خبرة</p></div>
+</div>
+</section>
+
+<section id="flight-search" style="background:var(--cream);">
+<span class="eyebrow-sm">بحث حي</span>
+<h2 class="section-title">ابحث عن رحلتك الآن</h2>
+<p class="section-sub">أسعار حقيقية ومحدّثة من مئات شركات الطيران — أدخل بيانات رحلتك واحصل على أفضل الأسعار المتاحة</p>
+
+<div class="card form-card">
+<form id="flightSearchForm">
+<div class="trip-toolbar" style="margin-bottom:16px;">
+<input id="fsOrigin" type="text" class="field" placeholder="من (مثال: KRT للخرطوم)" required maxlength="3" style="text-transform:uppercase;">
+<input id="fsDestination" type="text" class="field" placeholder="إلى (مثال: IST لإسطنبول)" required maxlength="3" style="text-transform:uppercase;">
+</div>
+<div class="trip-toolbar" style="margin-bottom:16px;">
+<input id="fsDepart" type="month" class="field" placeholder="شهر السفر">
+<input id="fsReturn" type="month" class="field" placeholder="شهر العودة (اختياري)">
+</div>
+<button type="submit" class="btn btn-block">ابحث عن رحلات</button>
+</form>
+
+<div id="fsLoading" style="display:none;text-align:center;padding:24px;color:var(--text-muted);">🔍 جاري البحث عن أفضل الأسعار...</div>
+<div id="fsError" style="display:none;text-align:center;padding:16px;color:#c0392b;"></div>
+<div id="fsResults" style="display:flex;flex-direction:column;gap:14px;margin-top:24px;"></div>
+</div>
+</section>
+
+<section id="trips">
+<span class="eyebrow-sm">وجهاتنا</span>
+<h2 class="section-title">الرحلات المميزة</h2>
+<p class="section-sub">اختر من بين باقاتنا الجاهزة أو تواصل معنا لتصميم برنامج خاص برحلتك</p>
+
+<div class="trip-toolbar">
+<input id="searchTrip" type="text" class="field" placeholder="ابحث عن رحلة أو وجهة...">
+<select id="filterCountry" class="field">
+<option value="">جميع الدول</option>
+<option value="تركيا">تركيا</option>
+<option value="الإمارات">الإمارات</option>
+<option value="السعودية">السعودية</option>
+<option value="مصر">مصر</option>
+<option value="ماليزيا">ماليزيا</option>
+<option value="إثيوبيا">إثيوبيا</option>
+<option value="أذربيجان">أذربيجان</option>
+<option value="تنزانيا">تنزانيا</option>
+</select>
+</div>
+
+<div class="grid" id="tripsContainer">
+
+<div class="card trip-card" data-country="تركيا">
+<div class="trip-img" style="background-image:url('https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=500&q=80');"><span class="trip-tag">الأكثر طلباً</span></div>
+<div class="trip-body">
+<h3>إسطنبول - تركيا</h3>
+<div class="trip-meta"><span>🗓 7 أيام</span><span>🏨 4 نجوم</span></div>
+<p class="trip-stars">⭐⭐⭐⭐⭐</p>
+<p class="trip-price">799$ <span>/ للشخص</span></p>
+<button class="btn btn-block book-btn" data-trip="إسطنبول - تركيا">احجز الآن</button>
+</div>
+</div>
+
+<div class="card trip-card" data-country="الإمارات">
+<div class="trip-img" style="background-image:url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=500&q=80');"><span class="trip-tag">عرض خاص</span></div>
+<div class="trip-body">
+<h3>دبي - الإمارات</h3>
+<div class="trip-meta"><span>🗓 5 أيام</span><span>🏨 5 نجوم</span></div>
+<p class="trip-stars">⭐⭐⭐⭐⭐</p>
+<p class="trip-price">899$ <span>/ للشخص</span></p>
+<button class="btn btn-block book-btn" data-trip="دبي - الإمارات">احجز الآن</button>
+</div>
+</div>
+
+<div class="card trip-card" data-country="السعودية">
+<div class="trip-img" style="background-image:url('https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=500&q=80');"><span class="trip-tag">برنامج ديني</span></div>
+<div class="trip-body">
+<h3>العمرة - مكة والمدينة</h3>
+<div class="trip-meta"><span>🗓 10 أيام</span><span>🏨 قريب من الحرم</span></div>
+<p class="trip-stars">⭐⭐⭐⭐⭐</p>
+<p class="trip-price">1200$ <span>/ للشخص</span></p>
+<button class="btn btn-block book-btn" data-trip="العمرة">احجز الآن</button>
+</div>
+</div>
+
+<div class="card trip-card" data-country="مصر">
+<div class="trip-img" style="background-image:url('https://images.unsplash.com/photo-1568322445389-f64ac9c4d6a5?auto=format&fit=crop&w=500&q=80');"></div>
+<div class="trip-body">
+<h3>القاهرة والأقصر - مصر</h3>
+<div class="trip-meta"><span>🗓 6 أيام</span><span>🏨 4 نجوم</span></div>
+<p class="trip-stars">⭐⭐⭐⭐</p>
+<p class="trip-price">650$ <span>/ للشخص</span></p>
+<button class="btn btn-block book-btn" data-trip="القاهرة والأقصر">احجز الآن</button>
+</div>
+</div>
+
+<div class="card trip-card" data-country="ماليزيا">
+<div class="trip-img" style="background-image:url('https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=500&q=80');"></div>
+<div class="trip-body">
+<h3>كوالالمبور - ماليزيا</h3>
+<div class="trip-meta"><span>🗓 8 أيام</span><span>🏨 4 نجوم</span></div>
+<p class="trip-stars">⭐⭐⭐⭐⭐</p>
+<p class="trip-price">950$ <span>/ للشخص</span></p>
+<button class="btn btn-block book-btn" data-trip="كوالالمبور">احجز الآن</button>
+</div>
+</div>
+
+<div class="card trip-card" data-country="تنزانيا">
+<div class="trip-img" style="background-image:url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=500&q=80');"><span class="trip-tag">شهر عسل</span></div>
+<div class="trip-body">
+<h3>زنجبار - تنزانيا</h3>
+<div class="trip-meta"><span>🗓 6 أيام</span><span>🏨 منتجع شاطئي</span></div>
+<p class="trip-stars">⭐⭐⭐⭐⭐</p>
+<p class="trip-price">1199$ <span>/ للشخص</span></p>
+<button class="btn btn-block book-btn" data-trip="زنجبار">احجز الآن</button>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<section id="booking" style="background:var(--cream);">
+<span class="eyebrow-sm">احجز الآن</span>
+<h2 class="section-title">احجز رحلتك القادمة</h2>
+<p class="section-sub">املأ النموذج وسيتواصل معك فريقنا خلال ساعات لتأكيد التفاصيل</p>
+
+<div class="card form-card">
+<form id="bookingForm">
+<input type="text" id="fullName" class="input" placeholder="الاسم الكامل" required>
+<input type="tel" id="phone" class="input" placeholder="رقم الهاتف" required>
+<input type="email" id="email" class="input" placeholder="البريد الإلكتروني" required>
+<textarea id="notes" class="input" placeholder="ملاحظات إضافية (الوجهة، التاريخ، عدد الأفراد...)"></textarea>
+<button type="submit" class="btn btn-block">إرسال طلب الحجز</button>
+</form>
+</div>
+</section>
+
+<section>
+<span class="eyebrow-sm">آراء العملاء</span>
+<h2 class="section-title">ماذا يقول عملاؤنا</h2>
+
+<div class="grid">
+
+<div class="card testi-card">
+<p class="stars">⭐⭐⭐⭐⭐</p>
+<p>"خدمة ممتازة وتنظيم رائع للرحلة من أول لحظة حتى العودة. تعامل احترافي وسرعة في الرد."</p>
+<div class="testi-who"><div class="testi-avatar">م</div><div><strong>محمد أحمد</strong><span>رحلة إسطنبول</span></div></div>
+</div>
+
+<div class="card testi-card">
+<p class="stars">⭐⭐⭐⭐⭐</p>
+<p>"أفضل وكالة سفر تعاملت معها في الخرطوم. باقة العمرة كانت منظمة بشكل رائع."</p>
+<div class="testi-who"><div class="testi-avatar">س</div><div><strong>سارة علي</strong><span>باقة العمرة</span></div></div>
+</div>
+
+<div class="card testi-card">
+<p class="stars">⭐⭐⭐⭐⭐</p>
+<p>"أسعار مناسبة ودعم ممتاز طوال فترة الرحلة، أنصح بالتعامل معهم بقوة."</p>
+<div class="testi-who"><div class="testi-avatar">أ</div><div><strong>أحمد حسن</strong><span>رحلة دبي</span></div></div>
+</div>
+
+</div>
+</section>
+
+<section>
+<span class="eyebrow-sm">أسئلة شائعة</span>
+<h2 class="section-title">لديك سؤال؟</h2>
+
+<div class="faq" id="faq">
+
+<div class="faq-item">
+<div class="faq-q">كيف يمكنني حجز رحلة؟<span class="plus">+</span></div>
+<div class="faq-a">يمكنك تعبئة نموذج الحجز في قسم "الحجز" أو التواصل معنا مباشرة عبر واتساب، وسيتواصل معك فريقنا لتأكيد التفاصيل والدفع.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q">ما هي طرق الدفع المتاحة؟<span class="plus">+</span></div>
+<div class="faq-a">نوفر عدة طرق للدفع تشمل التحويل البنكي والدفع النقدي في المكتب، وسنوضح لك التفاصيل عند التواصل معك.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q">هل يمكن تخصيص برنامج سياحي خاص؟<span class="plus">+</span></div>
+<div class="faq-a">بالتأكيد، نصمم باقات سياحية مخصصة حسب رغباتك وميزانيتك ومدة الرحلة التي تناسبك.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q">هل تشمل الأسعار التأشيرة؟<span class="plus">+</span></div>
+<div class="faq-a">يختلف الأمر حسب الباقة، بعض الباقات تشمل التأشيرة والبعض الآخر يقدمها كخدمة إضافية، ويظهر ذلك بوضوح عند الحجز.</div>
+</div>
+
+</div>
+</section>
+
+<section id="contact">
+<span class="eyebrow-sm">تواصل معنا</span>
+<h2 class="section-title">نحن هنا لمساعدتك</h2>
+
+<div class="grid">
+<div class="card">
+<div class="icon">📞</div>
+<h3>الهاتف</h3>
+<p>+249 909792836</p>
+</div>
+<div class="card">
+<div class="icon">📧</div>
+<h3>البريد الإلكتروني</h3>
+<p>info@alislami.com</p>
+</div>
+<div class="card">
+<div class="icon">📍</div>
+<h3>العنوان</h3>
+<p>السودان - الخرطوم</p>
+</div>
+</div>
+</section>
+
+<a href="https://wa.me/249909792836" class="whatsapp" target="_blank" rel="noopener">💬</a>
+<a href="#home" class="top-btn" id="topBtn">↑</a>
+
+<footer>
+<div class="footer-grid">
+
+<div>
+<div class="footer-logo">AL <span>ISLAMI</span></div>
+<p>وكالة سفر وسياحة سودانية متخصصة في تنظيم رحلات الحج والعمرة والبرامج السياحية حول العالم منذ أكثر من 10 سنوات.</p>
+<div class="social-row">
+<a href="#" aria-label="فيسبوك">f</a>
+<a href="#" aria-label="إنستغرام">ig</a>
+<a href="https://wa.me/249909792836" aria-label="واتساب">w</a>
+</div>
+</div>
+
+<div>
+<h4>روابط سريعة</h4>
+<ul class="footer-links">
+<li><a href="#home">الرئيسية</a></li>
+<li><a href="#services">خدماتنا</a></li>
+<li><a href="#offers">العروض</a></li>
+<li><a href="#trips">الرحلات</a></li>
+<li><a href="#booking">الحجز</a></li>
+</ul>
+</div>
+
+<div>
+<h4>خدماتنا</h4>
+<ul class="footer-links">
+<li><a href="#services">تذاكر الطيران</a></li>
+<li><a href="#services">الحج والعمرة</a></li>
+<li><a href="#services">حجوزات الفنادق</a></li>
+<li><a href="#services">التأشيرات</a></li>
+<li><a href="#services">باقات شهر العسل</a></li>
+</ul>
+</div>
+
+<div>
+<h4>تواصل معنا</h4>
+<p>📞 +249 909792836<br>📧 info@alislami.com<br>📍 السودان - الخرطوم</p>
+</div>
+
+</div>
+
+<div class="footer-bottom">
+<p>© 2026 AL ISLAMI Travel & Tourism — جميع الحقوق محفوظة · <a href="#admin" id="adminLink" style="color:rgba(255,255,255,.35);text-decoration:none;">إدارة</a></p>
+</div>
+</footer>
+
+<div id="toast">تمت العملية بنجاح</div>
+
+<!-- Admin Panel -->
+<section id="admin" style="display:none;">
+<h2 class="section-title">لوحة الإدارة</h2>
+
+<!-- Login form: shown when no admin is signed in -->
+<div class="card form-card" id="adminLoginBox">
+<h3 style="margin-bottom:25px;">تسجيل دخول الإدارة</h3>
+<form id="adminLoginForm">
+<input id="adminEmail" type="email" class="input" placeholder="البريد الإلكتروني" required autocomplete="username">
+<input id="adminPassword" type="password" class="input" placeholder="كلمة المرور" required autocomplete="current-password">
+<button class="btn btn-block" type="submit">دخول</button>
+<p id="adminLoginError" style="color:#c0392b;font-size:13.5px;margin-top:12px;display:none;"></p>
+</form>
+</div>
+
+<!-- Add trip form: shown only after successful sign-in -->
+<div class="card form-card" id="adminTripBox" style="display:none;">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;">
+<h3 style="margin:0;">إضافة رحلة جديدة</h3>
+<button type="button" id="adminLogoutBtn" class="btn" style="padding:10px 20px;font-size:13.5px;">تسجيل الخروج</button>
+</div>
+<form id="addTripForm">
+<input id="tripName" type="text" class="input" placeholder="اسم الرحلة" required>
+<input id="tripCountry" type="text" class="input" placeholder="الدولة" required>
+<input id="tripPrice" type="number" class="input" placeholder="السعر بالدولار" required>
+<button class="btn btn-block" type="submit">إضافة الرحلة</button>
+</form>
+</div>
+
+<!-- Bookings list: shown only after successful sign-in -->
+<div class="card form-card" id="adminBookingsBox" style="display:none;">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+<h3 style="margin:0;">طلبات الحجز الواردة</h3>
+<button type="button" id="refreshBookingsBtn" class="btn" style="padding:10px 20px;font-size:13.5px;">تحديث</button>
+</div>
+<p id="bookingsEmpty" style="color:var(--text-muted);font-size:14.5px;display:none;">ما فيه طلبات حجز حالياً.</p>
+<div id="bookingsList" style="display:flex;flex-direction:column;gap:14px;"></div>
+</div>
+</section>
+
+<script type="module">
+
+/* =====================================================
+   Firebase
+   ضع بيانات مشروعك الحقيقي هنا (من Firebase Console > Project Settings)
+   ثم فعّل Firestore وحدد قواعد الأمان (Security Rules) قبل الإطلاق.
+===================================================== */
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+
+import {
+getFirestore, collection, getDocs, addDoc, serverTimestamp, query, orderBy
+}
+from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+
+import {
+getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+
+const firebaseConfig = {
+apiKey:"AIzaSyB3nCRlfr2nUInbB6-q-zNK3CZ2DEtrJRQ",
+authDomain:"al-islami-travel.firebaseapp.com",
+projectId:"al-islami-travel",
+storageBucket:"al-islami-travel.firebasestorage.app",
+messagingSenderId:"1073262189366",
+appId:"1:1073262189366:web:2bca10a7dc378a72a83197",
+measurementId:"G-NG0015C15K"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+/* Loading */
+window.addEventListener("load",()=>{
+document.querySelector(".loader").classList.add("hide");
+});
+
+/* Mobile menu */
+const menuToggle = document.getElementById("menuToggle");
+const nav = document.getElementById("nav");
+if(menuToggle){
+menuToggle.addEventListener("click",()=>nav.classList.toggle("open"));
+nav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>nav.classList.remove("open")));
+}
+
+/* Navbar + back-to-top on scroll */
+const header = document.getElementById("header");
+const topBtn = document.getElementById("topBtn");
+window.addEventListener("scroll",()=>{
+if(window.scrollY>50){ header.classList.add("scrolled"); }
+else{ header.classList.remove("scrolled"); }
+if(window.scrollY>500){ topBtn.classList.add("show"); }
+else{ topBtn.classList.remove("show"); }
+});
+
+/* Counters */
+function counter(id,target){
+let n = 0;
+const step = Math.max(1, Math.ceil(target/100));
+const interval = setInterval(()=>{
+n += step;
+if(n>=target){ n = target; clearInterval(interval); }
+const el = document.getElementById(id);
+if(el) el.textContent = n.toLocaleString("en-US") + "+";
+},20);
+}
+counter("hs1",10000);
+counter("hs2",30);
+counter("hs3",10);
+counter("c1",10000);
+counter("c2",5000);
+counter("c3",30);
+counter("c4",10);
+
+/* Toast */
+function showToast(msg){
+const toast = document.getElementById("toast");
+toast.innerText = msg;
+toast.style.display = "block";
+setTimeout(()=>{ toast.style.display = "none"; },3000);
+}
+
+/* Search */
+const search = document.getElementById("searchTrip");
+if(search){
+search.addEventListener("keyup",()=>{
+const value = search.value.toLowerCase();
+document.querySelectorAll(".trip-card").forEach(card=>{
+card.style.display = card.innerText.toLowerCase().includes(value) ? "block" : "none";
+});
+});
+}
+
+/* Filter */
+const filter = document.getElementById("filterCountry");
+if(filter){
+filter.addEventListener("change",()=>{
+const value = filter.value;
+document.querySelectorAll(".trip-card").forEach(card=>{
+card.style.display = (value==="" || card.dataset.country===value) ? "block" : "none";
+});
+});
+}
+
+/* Book buttons -> scroll to booking + prefill notes */
+document.querySelectorAll(".book-btn").forEach(btn=>{
+btn.addEventListener("click",()=>{
+const notes = document.getElementById("notes");
+if(notes) notes.value = "الرحلة المطلوبة: " + btn.dataset.trip;
+document.getElementById("booking").scrollIntoView({behavior:"smooth"});
+});
+});
+
+/* Real flight search (Travelpayouts via Netlify Function) */
+const flightSearchForm = document.getElementById("flightSearchForm");
+if(flightSearchForm){
+flightSearchForm.addEventListener("submit", async function(e){
+e.preventDefault();
+
+const origin = document.getElementById("fsOrigin").value.trim().toUpperCase();
+const destination = document.getElementById("fsDestination").value.trim().toUpperCase();
+const departMonth = document.getElementById("fsDepart").value; // yyyy-mm
+const returnMonth = document.getElementById("fsReturn").value; // yyyy-mm
+
+const loadingEl = document.getElementById("fsLoading");
+const errorEl = document.getElementById("fsError");
+const resultsEl = document.getElementById("fsResults");
+
+resultsEl.innerHTML = "";
+errorEl.style.display = "none";
+loadingEl.style.display = "block";
+
+try{
+const params = new URLSearchParams({ origin, destination });
+if(departMonth) params.append("depart_date", departMonth);
+if(returnMonth) params.append("return_date", returnMonth);
+
+const res = await fetch(`/api/get-flights?${params.toString()}`);
+const data = await res.json();
+
+loadingEl.style.display = "none";
+
+if(!data.success || !data.results || data.results.length === 0){
+errorEl.textContent = "ما فيه نتائج متاحة لهذا الخط حالياً، جرّب وجهة أو تاريخ ثاني.";
+errorEl.style.display = "block";
+return;
+}
+
+data.results
+.sort((a,b)=>a.price-b.price)
+.forEach(flight=>{
+const card = document.createElement("div");
+card.style.cssText = "border:1px solid var(--border);border-radius:14px;padding:20px 22px;background:#fff;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;";
+const departDate = flight.departure_at ? new Date(flight.departure_at).toLocaleDateString("ar-EG") : "—";
+card.innerHTML = `
+<div>
+<strong style="font-size:16px;color:var(--primary);">${origin} → ${destination}</strong>
+<p style="color:var(--text-muted);font-size:13.5px;margin-top:6px;">شركة الطيران: ${flight.airline || "—"} · تاريخ المغادرة: ${departDate} · التوقفات: ${flight.transfers ?? "—"}</p>
+</div>
+<div style="text-align:left;">
+<div style="font-size:22px;font-weight:800;color:var(--accent);">$${flight.price}</div>
+<button type="button" class="btn book-btn" style="padding:10px 20px;font-size:13.5px;margin-top:6px;" data-trip="${origin} إلى ${destination} - ${flight.airline || ''}">احجز الآن</button>
+</div>
+`;
+resultsEl.appendChild(card);
+});
+
+/* اربط أزرار الحجز الجديدة بنفس سلوك زر "احجز الآن" الموجود */
+resultsEl.querySelectorAll(".book-btn").forEach(btn=>{
+btn.addEventListener("click",()=>{
+const notes = document.getElementById("notes");
+if(notes) notes.value = "الرحلة المطلوبة: " + btn.dataset.trip;
+document.getElementById("booking").scrollIntoView({behavior:"smooth"});
+});
+});
+
+}catch(err){
+loadingEl.style.display = "none";
+errorEl.textContent = "تعذر الاتصال بخدمة البحث، حاول مرة أخرى.";
+errorEl.style.display = "block";
+console.error("خطأ بحث الرحلات:", err);
+}
+});
+}
+
+/* FAQ accordion */
+document.querySelectorAll(".faq-q").forEach(q=>{
+q.addEventListener("click",()=>{
+q.parentElement.classList.toggle("open");
+});
+});
+
+/* Booking Form */
+const booking = document.getElementById("bookingForm");
+if(booking){
+booking.addEventListener("submit", async function(e){
+e.preventDefault();
+try{
+const data = {
+name: document.getElementById("fullName").value,
+phone: document.getElementById("phone").value,
+email: document.getElementById("email").value,
+notes: document.getElementById("notes").value,
+createdAt: serverTimestamp()
+};
+await addDoc(collection(db,"bookings"), data);
+showToast("تم إرسال طلب الحجز بنجاح");
+this.reset();
+}catch(err){
+console.error("خطأ إرسال الحجز:", err);
+showToast("تعذر إرسال الطلب: " + (err.message || "خطأ غير معروف"));
+}
+});
+}
+
+/* Add Trip (Admin) */
+const addTrip = document.getElementById("addTripForm");
+if(addTrip){
+addTrip.addEventListener("submit", async function(e){
+e.preventDefault();
+try{
+const trip = {
+name: document.getElementById("tripName").value,
+country: document.getElementById("tripCountry").value,
+price: Number(document.getElementById("tripPrice").value),
+createdAt: serverTimestamp()
+};
+await addDoc(collection(db,"trips"), trip);
+showToast("تمت إضافة الرحلة");
+this.reset();
+}catch(err){
+console.error("خطأ إضافة الرحلة:", err);
+showToast("تعذر إضافة الرحلة: " + (err.message || "خطأ غير معروف"));
+}
+});
+}
+
+/* Load Bookings (Admin only — Security Rules restrict read access to the admin email) */
+const bookingsList = document.getElementById("bookingsList");
+const bookingsEmpty = document.getElementById("bookingsEmpty");
+const refreshBookingsBtn = document.getElementById("refreshBookingsBtn");
+
+async function loadBookings(){
+if(!bookingsList) return;
+bookingsList.innerHTML = "";
+try{
+const q = query(collection(db,"bookings"), orderBy("createdAt","desc"));
+const snap = await getDocs(q);
+if(snap.empty){
+bookingsEmpty.style.display = "block";
+return;
+}
+bookingsEmpty.style.display = "none";
+snap.forEach(docSnap=>{
+const b = docSnap.data();
+const when = b.createdAt && b.createdAt.toDate ? b.createdAt.toDate().toLocaleString("ar-EG") : "—";
+const row = document.createElement("div");
+row.style.cssText = "border:1px solid var(--border);border-radius:12px;padding:16px 18px;background:#fff;";
+row.innerHTML = `
+<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
+<strong>${b.name || "—"}</strong>
+<span style="color:var(--text-muted);font-size:13px;">${when}</span>
+</div>
+<p style="font-size:14px;color:var(--text-muted);margin-bottom:4px;">📞 ${b.phone || "—"} · 📧 ${b.email || "—"}</p>
+${b.notes ? `<p style="font-size:14px;">${b.notes}</p>` : ""}
+`;
+bookingsList.appendChild(row);
+});
+}catch(err){
+console.error("تعذر تحميل الحجوزات:", err);
+bookingsEmpty.textContent = "تعذر تحميل الحجوزات (تأكد إنك مسجل دخول بحساب الأدمن).";
+bookingsEmpty.style.display = "block";
+}
+}
+if(refreshBookingsBtn){
+refreshBookingsBtn.addEventListener("click", loadBookings);
+}
+
+/* Load Trips (from Firestore, logged for now) */
+async function loadTrips(){
+try{
+const snap = await getDocs(collection(db,"trips"));
+console.log("Trips in Firestore:", snap.size);
+}catch(err){
+console.log("Firebase not configured yet:", err.message);
+}
+}
+loadTrips();
+
+/* =====================================================
+   Admin authentication (Firebase Auth)
+   لازم تفعّل Email/Password provider من Firebase Console > Authentication > Sign-in method
+   وتنشئ مستخدم أدمن واحد من Authentication > Users
+===================================================== */
+const adminSection = document.getElementById("admin");
+const adminLoginBox = document.getElementById("adminLoginBox");
+const adminTripBox = document.getElementById("adminTripBox");
+const adminBookingsBox = document.getElementById("adminBookingsBox");
+const adminLoginForm = document.getElementById("adminLoginForm");
+const adminLoginError = document.getElementById("adminLoginError");
+const adminLogoutBtn = document.getElementById("adminLogoutBtn");
+const adminLink = document.getElementById("adminLink");
+
+/* The admin section is hidden from the normal page flow; only reveal it via the footer "إدارة" link or a direct #admin visit */
+function revealAdminSection(){
+if(adminSection){
+adminSection.style.display = "block";
+adminSection.scrollIntoView({behavior:"smooth"});
+}
+}
+if(adminLink){
+adminLink.addEventListener("click",(e)=>{
+e.preventDefault();
+revealAdminSection();
+});
+}
+if(window.location.hash === "#admin"){
+revealAdminSection();
+}
+
+/* Only this email is allowed to use the admin panel.
+   Any other authenticated Firebase user is signed out immediately. */
+const ADMIN_EMAIL = "farisgadkarim123@gmail.com";
+
+/* React to sign-in state: show the trip form only when the authorized admin is signed in */
+onAuthStateChanged(auth, (user)=>{
+if(user && user.email === ADMIN_EMAIL){
+if(adminLoginBox) adminLoginBox.style.display = "none";
+if(adminTripBox) adminTripBox.style.display = "block";
+if(adminBookingsBox) adminBookingsBox.style.display = "block";
+loadBookings();
+}else if(user){
+/* Someone else logged in -> kick them out, never show the admin panel */
+signOut(auth);
+if(adminLoginError){
+adminLoginError.textContent = "هذا الحساب غير مصرح له بالدخول للوحة الإدارة";
+adminLoginError.style.display = "block";
+}
+if(adminLoginBox) adminLoginBox.style.display = "block";
+if(adminTripBox) adminTripBox.style.display = "none";
+if(adminBookingsBox) adminBookingsBox.style.display = "none";
+}else{
+if(adminLoginBox) adminLoginBox.style.display = "block";
+if(adminTripBox) adminTripBox.style.display = "none";
+if(adminBookingsBox) adminBookingsBox.style.display = "none";
+}
+});
+
+if(adminLoginForm){
+adminLoginForm.addEventListener("submit", async function(e){
+e.preventDefault();
+adminLoginError.style.display = "none";
+const email = document.getElementById("adminEmail").value;
+const password = document.getElementById("adminPassword").value;
+try{
+await signInWithEmailAndPassword(auth, email, password);
+this.reset();
+}catch(err){
+adminLoginError.textContent = "بيانات الدخول غير صحيحة أو المستخدم غير موجود";
+adminLoginError.style.display = "block";
+}
+});
+}
+
+if(adminLogoutBtn){
+adminLogoutBtn.addEventListener("click", async ()=>{
+await signOut(auth);
+showToast("تم تسجيل الخروج");
+});
+}
+
+</script>
+
+</body>
+</html>
