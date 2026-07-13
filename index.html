@@ -1873,14 +1873,16 @@ flightSearchBtn.disabled = true;
 flightSearchBtn.style.opacity = ".6";
 
 try{
-const params = new URLSearchParams({
+const response = await fetch("/.netlify/functions/search-flights", {
+method: "POST",
+headers: { "Content-Type": "application/json" },
+body: JSON.stringify({
 origin,
 destination,
-departure_date: departDate,
-passengers
+departureDate: departDate,
+passengers: Number(passengers)
+})
 });
-
-const response = await fetch(`/.netlify/functions/search-flights?${params.toString()}`);
 
 if(!response.ok){
 const errText = await response.text().catch(()=> "");
