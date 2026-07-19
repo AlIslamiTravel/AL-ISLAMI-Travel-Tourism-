@@ -1036,24 +1036,28 @@ footer{
 <div class="icon">🚗</div>
 <h3>تأجير السيارات</h3>
 <p>خيارات متنوعة لتأجير السيارات في أشهر الوجهات السياحية بأسعار مناسبة.</p>
+<button type="button" class="btn btn-block service-btn" data-service="تأجير السيارات">اطلب الآن</button>
 </div>
 
 <div class="card">
 <div class="icon">📄</div>
 <h3>خدمات التأشيرات</h3>
 <p>إنجاز إجراءات التأشيرة بسرعة ودقة لمعظم دول العالم مع متابعة الطلب أولاً بأول.</p>
+<button type="button" class="btn btn-block service-btn" data-service="خدمات التأشيرات">اطلب الآن</button>
 </div>
 
 <div class="card">
 <div class="icon">🛡️</div>
 <h3>التأمين على السفر</h3>
 <p>تغطية تأمينية شاملة تحميك من المخاطر الصحية والطارئة أثناء سفرك.</p>
+<button type="button" class="btn btn-block service-btn" data-service="التأمين على السفر">اطلب الآن</button>
 </div>
 
 <div class="card">
 <div class="icon">💍</div>
 <h3>باقات شهر العسل</h3>
 <p>برامج رومانسية مصممة خصيصاً للأزواج في أجمل الوجهات حول العالم.</p>
+<button type="button" class="btn btn-block service-btn" data-service="باقة شهر العسل">اطلب الآن</button>
 </div>
 
 </div>
@@ -1122,7 +1126,7 @@ footer{
 <h3>عرض الصيف - إسطنبول</h3>
 <p>7 ليالٍ شاملة الإقامة والإفطار وجولة البوسفور.</p>
 <div class="price-row"><span class="price-old">999$</span><span class="price-new">799$</span></div>
-<a href="#booking" class="btn btn-block">احجز العرض</a>
+<button type="button" class="btn btn-block offer-book-btn" data-trip="عرض الصيف - إسطنبول">احجز العرض</button>
 </div>
 </div>
 
@@ -1133,7 +1137,7 @@ footer{
 <h3>باقة العمرة المبكرة</h3>
 <p>10 أيام، إقامة قريبة من الحرمين، مواصلات ومرشد ديني.</p>
 <div class="price-row"><span class="price-old">1450$</span><span class="price-new">1200$</span></div>
-<a href="#booking" class="btn btn-block">احجز العرض</a>
+<button type="button" class="btn btn-block offer-book-btn" data-trip="باقة العمرة المبكرة">احجز العرض</button>
 </div>
 </div>
 
@@ -1144,7 +1148,7 @@ footer{
 <h3>شهر عسل - جزر المالديف بديل: زنجبار</h3>
 <p>6 ليالٍ في منتجع شاطئي فاخر مع عشاء خاص على الشاطئ.</p>
 <div class="price-row"><span class="price-old">1600$</span><span class="price-new">1199$</span></div>
-<a href="#booking" class="btn btn-block">احجز العرض</a>
+<button type="button" class="btn btn-block offer-book-btn" data-trip="باقة شهر العسل - زنجبار">احجز العرض</button>
 </div>
 </div>
 
@@ -1290,9 +1294,11 @@ footer{
 <div class="card form-card">
 <form id="bookingForm">
 <input type="text" id="fullName" class="input" placeholder="الاسم الكامل" required>
+<input type="text" id="bookingTrip" class="input" placeholder="اسم الرحلة أو الخدمة" readonly>
 <input type="tel" id="phone" class="input" placeholder="رقم الهاتف" required>
 <input type="email" id="email" class="input" placeholder="البريد الإلكتروني" required>
 <textarea id="notes" class="input" placeholder="ملاحظات إضافية (الوجهة، التاريخ، عدد الأفراد...)"></textarea>
+<div id="bookingMessage" style="margin-bottom:20px;font-size:14px;display:none;padding:14px 16px;border-radius:14px;background:#e9f7ef;color:#1e4620;"></div>
 <button type="submit" class="btn btn-block">إرسال طلب الحجز</button>
 </form>
 </div>
@@ -1576,13 +1582,28 @@ card.style.display = (value==="" || card.dataset.country===value) ? "block" : "n
 });
 }
 
-/* Book buttons -> scroll to booking + prefill notes */
+/* Book buttons -> scroll to booking + prefill booking form */
 document.querySelectorAll(".book-btn").forEach(btn=>{
 btn.addEventListener("click",()=>{
-const notes = document.getElementById("notes");
-if(notes) notes.value = "الرحلة المطلوبة: " + btn.dataset.trip;
-document.getElementById("booking").scrollIntoView({behavior:"smooth"});
+    openBookingForm(btn.dataset.trip || "رحلة مميزة");
 });
+});
+
+/* Offer buttons (داخل قسم العروض) -> افتح نموذج الحجز مع تعبئة اسم العرض */
+document.querySelectorAll('.offer-book-btn').forEach(btn=>{
+    btn.addEventListener('click',(e)=>{
+        e.preventDefault();
+        const tripName = btn.dataset.trip || 'عرض خاص';
+        openBookingForm(tripName);
+    });
+});
+
+/* Service buttons -> افتح نموذج الحجز أو واتساب لتواصل سريع */
+document.querySelectorAll('.service-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+        const serviceName = btn.dataset.service || 'خدمة سياحية';
+        openBookingForm(serviceName);
+    });
 });
 
 /* FAQ accordion */
@@ -1594,26 +1615,62 @@ q.parentElement.classList.toggle("open");
 
 /* Booking Form */
 const booking = document.getElementById("bookingForm");
+const bookingTrip = document.getElementById("bookingTrip");
+const bookingMessage = document.getElementById("bookingMessage");
+function openBookingForm(tripName){
+if(bookingTrip) bookingTrip.value = tripName || "";
+const notes = document.getElementById("notes");
+if(notes && tripName){
+notes.value = `الرحلة المطلوبة: ${tripName}`;
+}
+if(booking){
+booking.scrollIntoView({behavior:"smooth", block:"start"});
+}
+if(bookingMessage){
+bookingMessage.style.display = "none";
+bookingMessage.textContent = "";
+}
+}
+
+function showBookingMessage(text, success = true){
+if(!bookingMessage) return;
+bookingMessage.style.display = "block";
+bookingMessage.style.background = success ? "#e9f7ef" : "#fdecea";
+bookingMessage.style.color = success ? "#1e4620" : "#7d1d1d";
+bookingMessage.textContent = text;
+}
+
+function openWhatsAppFallback(data){
+const message = `طلب حجز من موقع الإسلامي%0Aالاسم: ${data.name}%0Aالهاتف: ${data.phone}%0Aالبريد: ${data.email}%0Aالرحلة: ${data.trip}%0Aالملاحظات: ${data.notes}`;
+window.open(`https://wa.me/249909792836?text=${message}`, "_blank");
+}
+
 if(booking){
 booking.addEventListener("submit", async function(e){
 e.preventDefault();
-try{
-const data = {
-name: document.getElementById("fullName").value,
-phone: document.getElementById("phone").value,
-email: document.getElementById("email").value,
-notes: document.getElementById("notes").value,
+const payload = {
+name: document.getElementById("fullName").value.trim(),
+trip: bookingTrip ? bookingTrip.value.trim() : "",
+phone: document.getElementById("phone").value.trim(),
+email: document.getElementById("email").value.trim(),
+notes: document.getElementById("notes").value.trim(),
 createdAt: serverTimestamp()
 };
-await addDoc(collection(db,"bookings"), data);
+try{
+await addDoc(collection(db,"bookings"), payload);
 showToast("تم إرسال طلب الحجز بنجاح");
+showBookingMessage("تم استلام طلبك وسوف يتواصل معك فريقنا لاحقاً.", true);
 this.reset();
+if(bookingTrip) bookingTrip.value = "";
 }catch(err){
 console.error("خطأ إرسال الحجز:", err);
-showToast("تعذر إرسال الطلب: " + (err.message || "خطأ غير معروف"));
+showBookingMessage("تعذر إرسال الطلب عبر الموقع حالياً. سيتم تحويلك إلى واتساب لإكمال الطلب.", false);
+openWhatsAppFallback(payload);
 }
 });
 }
+
+/* Add Trip (Admin) */
 
 /* Add Trip (Admin) */
 const addTrip = document.getElementById("addTripForm");
@@ -1821,16 +1878,17 @@ const slice = offer.slices && offer.slices[0];
 const segment = slice && slice.segments && slice.segments[0];
 const lastSegment = slice && slice.segments && slice.segments[slice.segments.length-1];
 
-const airline = (segment && segment.marketing_carrier && segment.marketing_carrier.name) || "شركة طيران";
-const flightNo = (segment && segment.marketing_carrier_flight_number) || "";
-const origin = (segment && segment.origin && segment.origin.iata_code) || "";
-const destination = (lastSegment && lastSegment.destination && lastSegment.destination.iata_code) || "";
+const airline = (segment && segment.airline) || (segment && segment.marketing_carrier && segment.marketing_carrier.name) || "شركة طيران";
+const flightNo = (segment && segment.flight_number) || (segment && segment.marketing_carrier_flight_number) || "";
+const origin = (slice && slice.origin) || (segment && segment.origin && segment.origin.iata_code) || "";
+const destination = (slice && slice.destination) || (lastSegment && lastSegment.destination && lastSegment.destination.iata_code) || "";
 const departTime = segment && segment.departing_at;
 const arriveTime = lastSegment && lastSegment.arriving_at;
 const stops = slice && slice.segments ? slice.segments.length - 1 : 0;
 const duration = slice && slice.duration ? formatDuration(slice.duration) : "";
 const price = offer.total_amount || "—";
 const currency = offer.total_currency || "";
+const flightDesc = `${airline} ${flightNo ? 'رحلة ' + flightNo : ''} ${origin}→${destination}`;
 
 const card = document.createElement("div");
 card.className = "flight-result-card";
@@ -1845,11 +1903,19 @@ card.innerHTML = `
 </div>
 <div class="flight-price-block">
 <div class="flight-price">${price} <span>${currency}</span></div>
-<a href="#booking" class="btn" style="padding:10px 26px;font-size:14px;">احجز هذه الرحلة</a>
+<button type="button" class="btn flight-result-book-btn" data-trip="${flightDesc}">احجز هذه الرحلة</button>
 </div>
 `;
 flightResults.appendChild(card);
 });
+}
+
+if(flightResults){
+    flightResults.addEventListener('click', function(e){
+        const button = e.target.closest('.flight-result-book-btn');
+        if (!button) return;
+        openBookingForm(button.dataset.trip || 'رحلة طيران');
+    });
 }
 
 if(flightForm){
@@ -1885,27 +1951,21 @@ passengers: Number(passengers)
 });
 
 if(!response.ok){
-const errText = await response.text().catch(()=> "");
-throw new Error(`خطأ من الخادم (${response.status}) ${errText ? "— " + errText : ""}`);
-}
+ const errorData = await response.json().catch(() => null);
+ const errMsg = errorData && errorData.error ? errorData.error : `خطأ من الخادم (${response.status})`;
+ throw new Error(errMsg);
+ }
 
-const data = await response.json();
-const offers = data.offers || data.data || data;
+ const data = await response.json();
+ const offers = data.offers || [];
 
-renderFlightResults(Array.isArray(offers) ? offers : []);
-
-}catch(err){
-console.error("خطأ بحث الرحلات:", err);
-flightResults.innerHTML = `<div class="flight-error">تعذر جلب نتائج الرحلات: ${err.message || "خطأ غير معروف"}. حاول مرة أخرى.</div>`;
-}finally{
-flightStatus.classList.remove("show");
-flightSearchBtn.disabled = false;
-flightSearchBtn.style.opacity = "1";
-}
-});
-}
-
-</script>
-
-</body>
-</html>
+ renderFlightResults(offers);
+ }catch(err){
+ console.error(err);
+ flightStatusText.textContent = err && err.message ? err.message : "حدث خطأ أثناء البحث";
+ flightStatus.classList.remove("show");
+ flightSearchBtn.disabled = false;
+ flightSearchBtn.style.opacity = "1";
+ }
+ });
+ }

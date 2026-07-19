@@ -12,6 +12,13 @@ exports.handler = async function (event) {
   }
 
   try {
+    // تأكد من وجود مفتاح Duffel في متغيرات البيئة
+    if(!process.env.DUFFEL_API_KEY){
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: "مفتاح Duffel غير مكوّن على الخادم. اتصل بالمسؤول." })
+      };
+    }
     const body = JSON.parse(event.body);
     const { origin, destination, departureDate, returnDate, passengers } = body;
 
@@ -65,31 +72,16 @@ exports.handler = async function (event) {
     if (!duffelResponse.ok) {
       console.error("Duffel error:", JSON.stringify(data));
       return {
-        statusCode: duffelResponse.status,
+        statusCode: duffelResponse.status || 500,
         body: JSON.stringify({
-          error: "تعذر البحث عن رحلات، حاول مرة أخرى",
+          error: "تعذر البحث عن رحلات من مزود الخدمة. حاول لاحقاً.",
           details: data,
         }),
       };
     }
 
-    // نرجع فقط أول 15 عرض عشان نخفف حجم الرد
-    const offers = (data.data.offers || []).slice(0, 15).map((offer) => ({
-      id: offer.id,
-      total_amount: offer.total_amount,
-      total_currency: offer.total_currency,
-      slices: offer.slices.map((slice) => ({
-        origin: slice.origin.iata_code,
-        destination: slice.destination.iata_code,
-        duration: slice.duration,
-        segments: slice.segments.map((seg) => ({
-          airline: seg.marketing_carrier.name,
-          flight_number: seg.marketing_carrier_flight_number,
-          departing_at: seg.departing_at,
-          arriving_at: seg.arriving_at,
-        })),
-      })),
-    }));
+    // نُعيد النتائج كما وردت من Duffel (محددة بعدد قليل لتقليل النقل)
+    const offers = (data.data && data.data.offers) ? data.data.offers.slice(0,15) : [];
 
     return {
       statusCode: 200,
