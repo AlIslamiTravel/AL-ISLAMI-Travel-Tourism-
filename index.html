@@ -1866,6 +1866,8 @@ return new Date(dt).toLocaleTimeString("ar-EG",{hour:"2-digit",minute:"2-digit"}
 }
 
 function renderFlightResults(offers){
+if(!flightResults) return; // تحقق من وجود العنصر
+
 flightResults.innerHTML = "";
 
 if(!offers || offers.length === 0){
@@ -1928,13 +1930,21 @@ const departDate = document.getElementById("flightDepartDate").value;
 const passengers = document.getElementById("flightPassengers").value;
 
 if(origin.length !== 3 || destination.length !== 3){
+if(flightResults){
 flightResults.innerHTML = `<div class="flight-error">رجاءً أدخل رمز مطار مكوّن من 3 أحرف (مثال: KWI، IST، DXB).</div>`;
+}
 return;
 }
 
+if(flightResults){
 flightResults.innerHTML = "";
+}
+if(flightStatus){
 flightStatus.classList.add("show");
+}
+if(flightStatusText){
 flightStatusText.textContent = "جاري البحث عن أفضل الرحلات المتاحة...";
+}
 flightSearchBtn.disabled = true;
 flightSearchBtn.style.opacity = ".6";
 
@@ -1962,8 +1972,12 @@ if(!response.ok){
  renderFlightResults(offers);
  }catch(err){
  console.error(err);
- flightStatusText.textContent = err && err.message ? err.message : "حدث خطأ أثناء البحث";
- flightStatus.classList.remove("show");
+ if(flightStatusText){
+   flightStatusText.textContent = err && err.message ? err.message : "حدث خطأ أثناء البحث";
+ }
+ if(flightStatus){
+   flightStatus.classList.remove("show");
+ }
  flightSearchBtn.disabled = false;
  flightSearchBtn.style.opacity = "1";
  }
